@@ -1,0 +1,193 @@
+<div class="container-fluid bg-light">
+    <div class="container bg-light">
+        <div class="row mt-4" style="height: 430px;">
+            <div class="col"></div>
+            <div class="col-md-6 bg-white shadow">
+                <div style="text-align: right;">
+                    <b>---</b>
+                </div>
+
+                <!-- <div class="card bg-warning mt-4">
+                    <h4 class="text-white ps-3 pt-2 pb-2">Movies Collection</h4>
+                </div> -->
+
+                <div class="shadow">
+
+                    <div class="input-group p-4">
+                        <h4 class="col-md-11">Movies Collection</h4>
+                        <button style="align-items: right;" class="btn btn-outline-success rounded-circle" type="button"
+                            data-bs-toggle="modal" data-bs-target="#exampleModalCopy">
+                            <fa-icon [icon]="faPlus"></fa-icon>
+                        </button>
+                    </div>
+
+                    <div class="input-group mb-3" style="padding-left: 20px; padding-right: 20px;">
+                        <input type="text" class="form-control" placeholder="movies title"
+                            aria-label="Recipient's username" aria-describedby="button-addon2"
+                            [(ngModel)]="searchTitle">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2"
+                            (click)="searchMovies()">Search</button>
+                    </div>
+
+                    <div style="overflow: auto; height: 430px;">
+                        <div class="m-3" *ngFor="let movies of moviesArr">
+                            <div class="p-2 shadow border">
+                                <div class="input-group row ps-3">
+                                    <div class="card col-md-3 border-0" style="position: relative;">
+                                        <h3
+                                            style="position: absolute; margin-top: 60%; margin-left: 40%; transform: translate(-50%, -50%);">
+                                            <fa-icon [icon]="faMasksTheater" size='2x'></fa-icon>
+                                        </h3>
+                                    </div>
+                                    <div class="card col-md-7 border-0 mt-2" style="height: 140px;">
+                                        <h4 style="padding-top: 10px;">{{movies.title}}</h4>
+                                        {{movies.director}}
+                                        <div style="text-align:right; padding-right: 20px; padding-top: 30px;">
+                                            {{movies.genres}}
+                                        </div>
+                                    </div>
+                                    <div class="col" style="text-align: right;">
+                                        <div>
+                                            <button class="btn btn-outline-primary row mt-4 mb-1 border-0" type="button"
+                                                data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                                (click)="call(movies)">
+                                                <fa-icon [icon]="faMagicWandSparkles"></fa-icon>
+                                            </button>
+                                        </div>
+                                        <div class="btn btn-outline-danger row mt-2 border-0"
+                                            (click)="deleteMovies(movies)">
+                                            <fa-icon [icon]="faPenRuler"></fa-icon>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <b>---</b>
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Movies Collection</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div>
+                                    <form action="" class="p-4">
+                                        <div class="mb-3"><label>Title</label>
+                                            <input type="text" [(ngModel)]="editTitle" name="title"
+                                                class="form-control">
+                                            <span *ngIf="errors.title" class="text-danger">{{errors.title}}</span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label>Director</label>
+                                            <input type="text" [(ngModel)]="editDirector" name="director"
+                                                class="form-control">
+                                            <span *ngIf="errors.director" class="text-danger">{{errors.director}}</span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label>Summary</label>
+                                            <input type="text" [(ngModel)]="editSummary" name="summary"
+                                                class="form-control">
+                                            <span *ngIf="errors.summary" class="text-danger">{{errors.summary}}</span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label>Genres</label>
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                              <label class="btn btn-outline-primary border-0">
+                                                <input autocomplete="off" type="checkbox" name="drama" [(ngModel)]="selectedGenres.drama" /> Drama
+                                              </label>
+                                              <label class="btn btn-outline-primary border-0">
+                                                <input autocomplete="off" type="checkbox" name="sciFi" [(ngModel)]="selectedGenres.sciFi" /><br> Sci-Fi
+                                              </label>
+                                              <label class="btn btn-outline-primary border-0">
+                                                <input autocomplete="off" type="checkbox" name="animation" [(ngModel)]="selectedGenres.animation" /> Animation
+                                              </label>
+                                              <label class="btn btn-outline-primary border-0">
+                                                <input autocomplete="off" type="checkbox" name="horror" [(ngModel)]="selectedGenres.horror" /> Horror
+                                              </label>
+                                              <label class="btn btn-outline-primary border-0">
+                                                <input autocomplete="off" type="checkbox" name="action" [(ngModel)]="selectedGenres.action" /> Action
+                                              </label>
+                                            </div>
+                                            <span *ngIf="errors.genres" class="text-danger">{{errors.genres}}</span>
+                                        </div>   
+                                        <div class="mb-3">
+                                            <button type="submit" class="btn btn-outline-success"
+                                                (click)="updateMovies()">Update</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModalCopy" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Movies Collection</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div>
+                                    <form action="" class="p-4">
+                                        <div class="mb-3"><label>Title</label>
+                                            <input type="text" [(ngModel)]="addTitle" name="title" class="form-control">
+                                            <span *ngIf="errors.title" class="text-danger">{{errors.title}}</span>
+                                        </div> 
+                                        <div class="mb-3">
+                                            <label>Director</label>
+                                            <input type="text" [(ngModel)]="addDirector" name="director" class="form-control">
+                                            <span *ngIf="errors.director" class="text-danger">{{errors.director}}</span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label>Summary</label>
+                                            <input type="text" [(ngModel)]="addSummary" name="summary" class="form-control">
+                                            <span *ngIf="errors.summary" class="text-danger">{{errors.summary}}</span>
+                                        </div>
+                                        <div class="mb-3 row">
+                                            <label>Genres</label>
+                                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                              <label class="btn btn-outline-primary border-0">
+                                                <input autocomplete="off" type="checkbox" name="drama" [(ngModel)]="selectedGenres.drama" /> Drama
+                                              </label>
+                                              <label class="btn btn-outline-primary border-0">
+                                                <input autocomplete="off" type="checkbox" name="sciFi" [(ngModel)]="selectedGenres.sciFi" /><br> Sci-Fi
+                                              </label>
+                                              <label class="btn btn-outline-primary border-0">
+                                                <input autocomplete="off" type="checkbox" name="animation" [(ngModel)]="selectedGenres.animation" /> Animation
+                                              </label>
+                                              <label class="btn btn-outline-primary border-0">
+                                                <input autocomplete="off" type="checkbox" name="horror" [(ngModel)]="selectedGenres.horror" /> Horror
+                                              </label>
+                                              <label class="btn btn-outline-primary border-0">
+                                                <input autocomplete="off" type="checkbox" name="action" [(ngModel)]="selectedGenres.action" /> Action
+                                              </label>
+                                            </div>
+                                            <span *ngIf="errors.genres" class="text-danger">{{errors.genres}}</span>
+                                        </div>                                          
+                                        <div class="mb-3">
+                                            <button type="submit" class="btn btn-outline-success"
+                                                (click)="addMovies()">Save</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+</div>
