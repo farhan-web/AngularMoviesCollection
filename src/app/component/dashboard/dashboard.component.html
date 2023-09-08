@@ -34,8 +34,7 @@
                         <div class="m-3" *ngFor="let movies of moviesArr">
                             <div class="p-2 shadow border">
                                 <div class="container">
-                                    <div class="row" type="button" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModalDetail" (click)="call(movies)">
+                                    <div class="row">
                                         <div
                                             class="col-md-12 pt-3 col-lg-3 d-flex align-items-center justify-content-center">
                                             <div class="card border-0" style="display: table-cell;
@@ -46,7 +45,8 @@
                                                 </h3>
                                             </div>
                                         </div>
-                                        <div class="col-md-12 col-lg-7 mt-2">
+                                        <div class="col-md-12 col-lg-7 mt-2" type="button" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalDetail" (click)="call(movies)">
                                             <div class="card border-0">
                                                 <h5>{{movies.title}}</h5>
                                                 {{movies.director}}
