@@ -1,8 +1,8 @@
-<div class="container-fluid bg-light">
-    <div class="container bg-light">
+<div class="container-fluid bg-light" style="height: 768px">
+    <div class="container bg-light" style="height: 100%;">
         <div class="row mt-4">
-            <div class="col"></div>
-            <div class="col-md-6 bg-white shadow">
+            <div class="col" style="height: 100%;"></div>
+            <div class="col-md-6 bg-white shadow" style="height: 100%;">
                 <div style="text-align: right;">
                     <b>---</b>
                 </div>
@@ -30,7 +30,7 @@
                             (click)="searchMovies()">Search</button>
                     </div>
 
-                    <div style="overflow: auto; max-height: 430px;">
+                    <div style="overflow: auto; height: 520px;">
                         <div class="m-3" *ngFor="let movies of moviesArr">
                             <div class="p-2 shadow border">
                                 <div class="container">
@@ -101,7 +101,6 @@
                                             <input type="text" [(ngModel)]="editSummary" name="summary"
                                                 class="form-control">
                                             <span *ngIf="errors.summary" class="text-danger">{{errors.summary}}</span>
-                                            <span>{{editSummary}}</span>
                                         </div>
                                         <div class="mb-3">
                                             <label>Genres</label>
@@ -277,7 +276,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col"></div>
+            <div class="col" style="height: 100%;"></div>
         </div>
     </div>
 </div>
