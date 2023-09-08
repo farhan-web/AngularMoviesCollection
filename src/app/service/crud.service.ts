@@ -11,7 +11,7 @@ export class CrudService {
   serviceURL : string;
 
   constructor(private http : HttpClient) { 
-    this.serviceURL = "http://springmoviescollection-production.up.railway.app/api/movies"
+    this.serviceURL = "https://springmoviescollection-production.up.railway.app/api/movies"
   }
 
   addMovies(movies : Movies) : Observable<Movies> {
