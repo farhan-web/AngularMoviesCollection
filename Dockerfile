@@ -1,4 +1,4 @@
-# Use an official Node.js runtime as a parent image
+# Use an official Node.js runtime as a parent image for the build stage
 FROM node:16 AS build
 
 # Set the working directory in the container
@@ -16,15 +16,14 @@ COPY . .
 # Build the Angular app
 RUN npm run build
 
-# Use a smaller, production-ready base image
-FROM nginx:alpine
+# Use NGINX as the base image for serving the application
+FROM nginx:latest
 
-WORKDIR /usr/share/nginx/html
-# Copy the built Angular app from the build image to the NGINX web server directory
-COPY --from=build /dist/movies-collection .
+# Copy the built Angular app from the build stage to the NGINX web server directory
+COPY --from=build /usr/local/app/dist/movies-collection /usr/share/nginx/html
 
 # Expose the port that NGINX will listen on
 EXPOSE 80
 
 # Start NGINX in the foreground
-# CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx", "-g", "daemon off;"]
