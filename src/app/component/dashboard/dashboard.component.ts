@@ -39,11 +39,11 @@ export class DashboardComponent implements OnInit {
   searchTitle: string = '';
 
   faMasksTheater = faMasksTheater;
-  faMagicWandSparkles = faPen; // Rename this to `faMagicWandSparkles`
+  faMagicWandSparkles = faPen;
   faPenRuler = faPenRuler;
   faPlus = faPlus;
 
-  errors : any = [];
+  errors: any = [];
 
   genres = [
     { name: 'Drama', selected: false },
@@ -53,7 +53,7 @@ export class DashboardComponent implements OnInit {
     { name: 'Horror', selected: false },
   ];
 
-  constructor(private crudService: CrudService) {}
+  constructor(private crudService: CrudService) { }
 
   getSelectedGenresAsString(): string {
     const selectedGenresArray = Object.keys(this.selectedGenres).filter(
@@ -66,32 +66,33 @@ export class DashboardComponent implements OnInit {
     // Move the initialization code to a separate function for reusability.
     this.resetFormFields();
     this.getAllMovies();
+    this.reloadPage();
   }
 
   saveForm = new FormGroup({
     titleValue: new FormControl("", [
-      Validators.required, 
+      Validators.required,
       Validators.minLength(2)]),
     director: new FormControl(""),
     summary: new FormControl(""),
     genres: new FormControl(""),
   })
 
-  get Title():FormControl{
+  get Title(): FormControl {
     return this.saveForm.get("titleValue") as FormControl;
   }
-  get Director():FormControl{
+  get Director(): FormControl {
     return this.saveForm.get("director") as FormControl;
   }
-  get Summary():FormControl{
+  get Summary(): FormControl {
     return this.saveForm.get("summary") as FormControl;
   }
-  get Genres():FormControl{
+  get Genres(): FormControl {
     return this.saveForm.get("genres") as FormControl;
   }
 
   // Create a function to reset all form fields to their initial state.
-  resetFormFields() { 
+  resetFormFields() {
     this.selectedGenres.drama = false;
     this.selectedGenres.sciFi = false;
     this.selectedGenres.animation = false;
@@ -134,9 +135,10 @@ export class DashboardComponent implements OnInit {
         this.resetFormFields(); // Reset the form fields after adding a movie
         this.getAllMovies();
         window.alert("Created")
-      },(err) => {
+      }, (err) => {
         this.errors = err.error;
         console.log(err, 'errors');
+        this.getAllMovies();
         // alert(err);
       }
     );
@@ -156,7 +158,8 @@ export class DashboardComponent implements OnInit {
       },
       (err) => {
         this.errors = err.error;
-        console.log(err, 'errors');
+        this.getAllMovies();
+        console.log(err, 'errors');        
         // alert(err);
       }
     );
@@ -193,5 +196,23 @@ export class DashboardComponent implements OnInit {
         this.getAllMovies();
       }
     );
+  }
+
+  reloadPage() {
+    this.addTitle = '';
+    this.addDirector = '';
+    this.addSummary = '';
+    this.editTitle = '';
+    this.editDirector = '';
+    this.editSummary = '';
+    this.selectedGenres = {
+      drama: false,
+      sciFi: false,
+      animation: false,
+      horror: false,
+      action: false
+    };
+    this.errors = {};
+
   }
 }
