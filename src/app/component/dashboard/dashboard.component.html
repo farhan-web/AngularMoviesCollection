@@ -46,7 +46,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-12 col-lg-7 mt-2" type="button" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModalDetail" (click)="call(movies)">
+                                            data-bs-target="#exampleModalDetail" (click)="call(movies)">
                                             <div class="card border-0">
                                                 <h5>{{movies.title}}</h5>
                                                 {{movies.director}}
@@ -73,6 +73,7 @@
                     </div>
                 </div>
                 <b>---</b>
+                <!-- modal update -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                     aria-hidden="true" style="
                     align-items: center;
@@ -81,8 +82,8 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Movies Collection</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close" (click)="getAllMovies()"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                    (click)="reloadPage()"></button>
                             </div>
                             <div class="modal-body">
                                 <div>
@@ -140,7 +141,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Modal -->
+                <!-- Modal Create -->
                 <div style="
                     align-items: center;
                     justify-content: center;" class="modal fade" id="exampleModalCopy" tabindex="-1"
@@ -149,8 +150,8 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Movies Collection</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close" (click)="getAllMovies()"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                    (click)="reloadPage()"></button>
                             </div>
                             <div class="modal-body">
                                 <div>
@@ -216,8 +217,8 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="exampleModalLabel">Movies Detail</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close" (click)="getAllMovies()"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                                    (click)="reloadPage()"></button>
                             </div>
                             <div class="modal-body">
                                 <div>
