@@ -183,6 +183,12 @@ export class DashboardComponent implements OnInit {
     this.editDirector = emovies.director;
     this.editSummary = emovies.summary;
     this.editGenres = emovies.genres;
+    const genresArray = this.editGenres.split('/ ');
+    for (const genre of genresArray) {
+      if (this.selectedGenres.hasOwnProperty(genre)) {
+        this.selectedGenres[genre] = true;
+      }
+    }
   }
 
   searchMovies() {
